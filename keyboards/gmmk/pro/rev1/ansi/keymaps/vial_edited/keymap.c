@@ -16,6 +16,8 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #include QMK_KEYBOARD_H
 
+#include "rgb_matrix_map.h"
+
 // clang-format off
 const uint16_t PROGMEM keymaps[][MATRIX_ROWS][MATRIX_COLS] = {
 
@@ -84,14 +86,20 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [3] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
 };
 
-// caps lock indicator on alphanumeric keys https://docs.qmk.fm/features/rgb_matrix
+// caps lock indicator  https://docs.qmk.fm/features/rgb_matrix
 bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
     if (host_keyboard_led_state().caps_lock) {
-        for (uint8_t i = led_min; i < led_max; i++) {
-            if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
-                rgb_matrix_set_color(i, RGB_RED);
-            }
+        for (uint8_t i = 0; i < 8; i++) {
+            rgb_matrix_set_color(LED_SIDE_LEFT[i],RGB_PURPLE2);
+            rgb_matrix_set_color(LED_SIDE_RIGHT[i],RGB_PURPLE2);
         }
+        rgb_matrix_set_color(LED_CAPS, RGB_NAUTILUS);
     }
+
+    //Turn off faulty leds
+    rgb_matrix_set_color(LED_S, RGB_BLACK);
+    rgb_matrix_set_color(LED_LEFT, RGB_BLACK);
+    rgb_matrix_set_color(LED_LBRC, RGB_BLACK);
+
     return false;
 }
