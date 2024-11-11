@@ -83,3 +83,15 @@ const uint16_t PROGMEM encoder_map[][NUM_ENCODERS][2] = {
     [2] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
     [3] = { ENCODER_CCW_CW(KC_TRNS, KC_TRNS) },
 };
+
+// caps lock indicator on alphanumeric keys https://docs.qmk.fm/features/rgb_matrix
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max) {
+    if (host_keyboard_led_state().caps_lock) {
+        for (uint8_t i = led_min; i < led_max; i++) {
+            if (g_led_config.flags[i] & LED_FLAG_KEYLIGHT) {
+                rgb_matrix_set_color(i, RGB_RED);
+            }
+        }
+    }
+    return false;
+}

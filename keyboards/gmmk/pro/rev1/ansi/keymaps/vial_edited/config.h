@@ -29,4 +29,14 @@
 #define VIAL_UNLOCK_COMBO_ROWS { 1, 10 }
 #define VIAL_UNLOCK_COMBO_COLS { 3, 4 }
 
+// Set debounce time - default 5, set to 8 to try to reduce chatter
 #define DEBOUNCE 8
+
+// Force n-key rollover
+#define FORCE_NKRO
+
+// Caps Word configuration
+#define BOTH_SHIFTS_TURNS_ON_CAPS_WORD
+#define CAPS_WORD_IDLE_TIMEOUT 10000      // Automatically turn off after x milliseconds of idle. 0 to never timeout.
+
+#define RGB_DISABLE_WHEN_USB_SUSPENDED // Turn off when pc off
